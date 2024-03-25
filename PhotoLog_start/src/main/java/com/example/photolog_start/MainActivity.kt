@@ -48,15 +48,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
 
-                    val startNavigation =
-                        if (permissionManager.hasAllPermissions) {
-                            Screens.Home.route
-                        } else {
-                            Screens.Permissions.route
-                        }
+                    val startNavigation = Screens.Home.route
 
                     NavHost(navController = navController, startDestination = startNavigation) {
-                        composable(Screens.Permissions.route) { PermissionScreen(navController) }
                         composable(Screens.Home.route) { HomeScreen(navController) }
                         composable(Screens.AddLog.route) { AddLogScreen(navController) }
                         composable(Screens.Camera.route) { CameraScreen(navController) }
@@ -78,7 +72,6 @@ class MainActivity : ComponentActivity() {
 }
 
 sealed class Screens(val route: String) {
-    object Permissions : Screens("permissions")
     object Home : Screens("home")
     object AddLog : Screens("add_log")
     object Camera : Screens("camera")
